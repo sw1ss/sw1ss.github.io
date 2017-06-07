@@ -1,0 +1,43 @@
+title: sw1ss.team
+url: "https://blog.sw1ss.team"
+baseurl:
+
+# Default description in social shares for the jekyll-seo-tag gem
+description: Havin' fun with security related stuff
+
+collections:
+  members:
+    output: false
+
+paginate: 10
+paginate_path: "/blog/:num/"
+permalink: pretty
+
+jekyll-archives:
+  enabled:
+    - "categories"
+
+gems:
+  - "jekyll-feed"
+  - "jekyll-seo-tag"
+  - "jekyll-paginate"
+  - "jekyll-archives"
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: "index.html"
+      type: "pages"
+    values:
+      layout: "default"
+
+# -----------
