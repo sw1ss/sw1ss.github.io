@@ -1,5 +1,5 @@
 ---
-title: Tower (Grab Bag 154)
+title: PoliCTF - Tower (Grab Bag 154)
 categories:
   - PoliCTF17
 author_member: afs
