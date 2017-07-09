@@ -156,7 +156,7 @@ section {
 
 .image-grid {
 	padding: 0;
-	width: 40%;
+	width: 100%;
 	list-style: none;
 	display: flex;
 	flex-flow: wrap;
@@ -245,4 +245,15 @@ section {
 	p {
 		color: #fefefe;
 	}
+}
+
+@media screen and (min-device-width : 480px) {
+	.image-grid {
+		width: 50%;
+	}	
+}
+@media screen and (min-device-width : 780px) {
+	.image-grid {
+		width: 40%;
+	}	
 }
