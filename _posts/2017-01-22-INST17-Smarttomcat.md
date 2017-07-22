@@ -1,7 +1,6 @@
 ---
-title: INST17 - smarttomcat (Web 50)
-categories:
-  - INST17
+title: smarttomcat (Web 50)
+category: INST17
 author_member: avarx
 show_comments: false
 ---

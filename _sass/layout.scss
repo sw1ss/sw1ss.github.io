@@ -252,6 +252,25 @@ div .post-content p, div code {
 	white-space: -o-pre-wrap;   /* Opera 7 */    
 	word-wrap: break-word;      /* IE */
 }
+
+.post-tag::before {
+    content: "";
+    font-family: FontAwesome;
+    padding-right: 0.5em;
+}
+
+.categories a {
+    text-decoration: none;
+}
+
+.categories h2 {
+    margin: 0;
+}
+
+.category {
+    padding: 0;
+}
+
 @media screen and (min-device-width : 480px) {
 	.image-grid {
 		width: 50%;

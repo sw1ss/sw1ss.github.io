@@ -1,7 +1,6 @@
 ---
-title: PoliCTF17 - Rock Solid Cryptography (Crypto 33)
-categories:
-  - PoliCTF17
+title: Rock Solid Cryptography (Crypto 33)
+category: PoliCTF17
 author_member: afs
 show_comments: false
 ---

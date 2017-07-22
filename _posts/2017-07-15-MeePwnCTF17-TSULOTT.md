@@ -1,7 +1,6 @@
 ---
-title: MeePwnCTF17 - TSULOTT (Web 100)
-categories:
-  - MeePwnCTF17
+title: TSULOTT (Web 100)
+category: MeePwnCTF17
 author_member: jokker
 show_comments: false
 ---

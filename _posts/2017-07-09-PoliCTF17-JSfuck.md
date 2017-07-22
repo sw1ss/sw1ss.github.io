@@ -1,7 +1,6 @@
 ---
-title: PoliCTF17 - JSfuck (Grab Bag 117)
-categories:
-  - PoliCTF17
+title: JSfuck (Grab Bag 117)
+category: PoliCTF17
 author_member: jokker
 show_comments: false
 ---
