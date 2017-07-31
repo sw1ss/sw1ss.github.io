@@ -5,17 +5,15 @@ author_member: muffinx
 show_comments: false
 ---
 
-Binary type (file linux command):
+Binary type:
 
 ```
-file pwn100
 pwn100: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=4eed8d04991f7b37ef1e309f1ecc983d7ff84333, not stripped
 ```
 
-Binary security measurements (gdb-peda checksec):
+Binary security measurements:
 
 ```
-gdb-peda$ checksec
 CANARY    : disabled
 FORTIFY   : disabled
 NX        : disabled
@@ -87,7 +85,6 @@ EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
 I found a ropgadget with that we can jump into our placed shellcode:
 
 ```
-ropgadget --binary pwn100
 0x08048386 : call eax
 ```
 
