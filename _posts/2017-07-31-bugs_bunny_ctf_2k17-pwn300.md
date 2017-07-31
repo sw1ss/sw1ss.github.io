@@ -64,7 +64,8 @@ But why? That's pretty clear when we take a more exact look at it:
 .text:00000000004007A5 call    _read
 .text:00000000004007AA movzx   eax, [rbp+buf]
 .text:00000000004007B1 cmp     al, 0Ah         ; check if it's a newline character -> execute code
-.text:00000000004007B3 jz      short shellcode_finished```
+.text:00000000004007B3 jz      short shellcode_finished
+```
 
 So it reads exactly one byte and checks if it's 0Ah = "\n" (newline).
 If it's it'll jump to this code:
