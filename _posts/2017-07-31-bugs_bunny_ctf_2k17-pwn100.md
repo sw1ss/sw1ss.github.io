@@ -1,5 +1,5 @@
 ---
-title: pwn100
+title: pwn100 (pwnage 100)
 category: bugs_bunny_ctf_2k17
 author_member: muffinx
 show_comments: false
