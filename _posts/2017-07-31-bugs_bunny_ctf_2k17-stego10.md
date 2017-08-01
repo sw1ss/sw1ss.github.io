@@ -1,6 +1,6 @@
 # Stego10
 This was the easiest steganography challenge - almost too easy to make a writeup
-##Challenge description
+## Challenge description
 ```text
 My comment :
 Do you even need a description for this one ?!!
