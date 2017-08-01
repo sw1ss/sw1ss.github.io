@@ -1,4 +1,5 @@
 # Stego100
+In this challenge we had to separate the even from the odd pixels
 ## Challenge description
 ```text
 odd and even are two friends since ever.
