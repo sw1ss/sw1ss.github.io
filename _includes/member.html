@@ -1,21 +1,42 @@
         
-        <h3><a href="https://sw1ss.team/members/{{ include.member.name }}">{{ include.member.name }}</a></h3>
+        <center><h3><a href="{{ include.member.url }}">--[ {{ include.member.name }} ]--</a></h3></center>
+        <br>
         <div class="post-content">
-            <img src="{{ include.member.image_path }}" alt="{{ include.member.name }}" />
-            <h4>Name : </h4>{{ include.member.name }}
-            <h4>Team Position : </h4>{{ include.member.position }}
+            <center><img src="{{ include.member.image_path }}" alt="{{ include.member.name }}" /></center>
+            <span><h4>Name : </h4>{{ include.member.name }}</span>
+            <br>
+            <span><h4>Team Position : </h4>{{ include.member.position }}</span>
+            <br>
+            {% if include.member.social-networks %}
             <h4>Social Networks :</h4>
             <ul>
-                {% if include.member.twitter %}
+                {% for social-network in include.member.social-networks %}
                 <li>
-                    <h5>Twitter : </h5><a href="https://twitter.com/{{ include.member.twitter }}" target="_blank">{{ include.member.name }}'s Twitter</a>
+                    <label>{{ social-network.name }}: </label><a href="{{ social-network.url }}">{{ include.member.name }}'s {{ social-network.name }}</a>
                 </li>
-                {% endif %}
-                
-                {% if include.member.github %}
-                <li>
-                    <h5>Github : </h5><a href="https://github.com/{{ include.member.github }}" target="_blank">{{ include.member.name }}'s Github</a>
-                </li>
-                {% endif %}
+                {% endfor %}
             </ul>
+            {% endif %}
+            
+            {% if include.member.hacking-platforms %}
+            <h4>Online Hacking Platforms :</h4>
+            <ul>
+                {% for hacking-platform in include.member.hacking-platforms %}
+                <li>
+                    <label>{{ hacking-platform.name }}: </label><a href="{{ hacking-platform.url }}">View {{ hacking-platform.name }} profile</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+    
+            {% if include.member.bug-bounties %}
+            <h4>Bug Bounties References :</h4>
+            <ul>
+            {% for bug-bounty in include.member.bug-bounties %}
+                <li>
+                    <label>{{ bug-bounty.vendor }}: </label><a href="{{ bug-bounty.url }}">View {{ bug-bounty.vendor }}'s Hall Of Fame</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
         </div>

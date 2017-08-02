@@ -1,35 +1,73 @@
 - name: 4ng3l0fh3ll
   position: Web/Forensic/Dictator
   image_path: http://sw1ss.team/images/members/4ng3l0fh3ll.jpg
-  twitter: VoiceOfTheHell
-  github: gottburgm
-  url: /members/4ng3l0fh3ll/
-
+  url: http://sw1ss.team/members/4ng3l0fh3ll/
+  social-networks:
+    - name: Twitter
+      url: https://twitter.com/VoiceOfTheHell
+    - name: Github
+      url: https://github.com/gottburgm
+  hacking-platforms:
+    - name: Root-me
+      url: https://www.root-me.org/Michael-Gottburg?inc=score&lang=en
+    - name: Hacking-Lab
+      url: https://www.hacking-lab.com/user/profile/Michael_Gottburg/
+    - name: W3Challs
+      url: https://w3challs.com/profile/Michael_Gottburg/
+  bug-bounties:
+    - vendor: Microsoft
+      url: "https://technet.microsoft.com/en-us/security/cc308575.aspx#1114"
+    - vendor: RedHat
+      url: "https://access.redhat.com/articles/66234"
+  
 - name: afs
   position: Web
   image_path: http://sw1ss.team/images/members/afs.jpg
-  twitter: sandstroh
-  url: /members/afs/
+  url: http://sw1ss.team/members/afs/
+  social-networks:
+  - name: Twitter
+    url: https://twitter.com/sandstroh
 
 - name: avarx
   position: Web
   image_path: http://sw1ss.team/images/members/avarx.jpg
-  twitter: avarx_
-  url: /members/avarx/
+  url: http://sw1ss.team/members/avarx/
+  social-networks:
+    - name: Twitter
+      url: https://twitter.com/avarx_
 
 - name: jokker
   position: RE
   image_path: http://sw1ss.team/images/members/jokker.jpg
-  twitter: jokker87
-  url: /members/jokker/
+  url: http://sw1ss.team/members/jokker/
+  social-networks:
+     - name: Twitter
+       url: https://twitter.com/jokker87
 
 - name: MH
   position: Crypto/Stego
   image_path: http://sw1ss.team/images/members/MH.jpg
-  url: /members/MH/
-
+  url: http://sw1ss.team/members/MH/
+  
+- name: morpheuz
+  position: /
+  image_path: http://sw1ss.team/images/members/morpheuz.jpg
+  url: http://sw1ss.team/members/morpheuz/
+  
 - name: muffinx
   position: PWN/RE
   image_path: http://sw1ss.team/images/members/muffinx.png
-  twitter: muffiniks
-  url: /members/muffinx/
+  url: http://sw1ss.team/members/muffinx/
+  social-networks:
+    - name: Twitter
+      url: https://twitter.com/muffiniks
+  
+- name: pingtux
+  position: /
+  image_path: http://sw1ss.team/images/members/default.jpg
+  url: http://sw1ss.team/members/pingtux/
+  
+- name: pyth0n33
+  position: /
+  image_path: http://sw1ss.team/images/members/default.jpg
+  url: http://sw1ss.team/members/pyth0n33/

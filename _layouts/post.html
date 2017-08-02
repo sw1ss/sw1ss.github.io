@@ -16,12 +16,14 @@ layout: page
 		<div class="container">
 			<h2>Author</h2>
 			<ul class="image-grid">
-				{% assign author_id = page.author_member | prepend: "/members/" | append: "/" %}
+			    {% assign author_id = page.author_member | prepend: "http://sw1ss.team/members/" | append: "/" %}
 				{% assign author = site.data.members | where: "url", author_id | first %}
-
 				<li>
-                    <img src="{{ author.image_path }}" alt="{{ author.name }}" /><br>
-                    <center><a href="https://sw1ss.team{{ author.url }}">{{ author.name }}</a></center>
+                    <p>
+                        <img src="{{ author.image_path }}" alt="{{ author.name }}" />
+                        <br><br>
+                        <center><a href="{{ author.url }}">{{ author.name }}</a></center>
+                    </p>
                 </li>
 			</ul>
 		</div>
