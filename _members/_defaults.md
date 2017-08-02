@@ -1,4 +1,6 @@
-name: ""
-position: ""
-image_path: ""
-twitter: ""
+---
+name:
+position:
+image_path:
+twitter:
+---
