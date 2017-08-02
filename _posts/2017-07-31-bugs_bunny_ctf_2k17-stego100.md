@@ -1,5 +1,5 @@
 ---
-title: Stego 100
+title: odd & even 2 (Stego 100)
 category: bugs_bunny_ctf_2k17
 author_member: MH
 show_comments: false

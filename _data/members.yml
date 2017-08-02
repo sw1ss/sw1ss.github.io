@@ -57,6 +57,14 @@
   position: Cryptography/Steganography
   image_path: http://sw1ss.team/images/members/MH.jpg
   url: http://sw1ss.team/members/MH/
+  social-networks:
+    - name: Github
+      url: https://github.com/Miro-H
+    - name: CTFtime
+      url: https://ctftime.org/user/18636
+  hacking-platforms:
+    - name: Hacking-Lab
+      url: https://www.hacking-lab.com/user/profile/_MH_/
   
 - name: morpheuz
   position: Reverse Engineering/Exploitation/Programming
