@@ -7,7 +7,7 @@ description: Havin' fun with security related stuff
 
 collections:
   members:
-    output: false
+    output: true
 
 paginate: 10
 paginate_path: "/blog/:num/"
