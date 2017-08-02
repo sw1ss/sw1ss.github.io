@@ -1,7 +1,6 @@
 ---
 title:
-categories:
+category:
 author_member:
 show_comments: true
-date:
 ---
