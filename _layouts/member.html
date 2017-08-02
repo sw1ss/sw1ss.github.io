@@ -4,9 +4,9 @@ layout: page
 {% for member in site.data.members %}
   {% if member.name == page.author %}
 	<section class="diagonal">
-		<div class="blog-post text-container">
+		<div class="blog-post text-container members">
 			<div class="post-content">
-                           {% include member.html member=member %}
+            	{% include member.html member=member %}
 			</div>
 	
 		</div>
