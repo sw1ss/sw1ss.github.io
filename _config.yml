@@ -30,6 +30,11 @@ defaults:
     values:
       layout: "page"
   - scope:
+      path: ""
+      type: "members"
+    values:
+      layout: "default"
+  - scope:
       path: "index.html"
       type: "pages"
     values:
