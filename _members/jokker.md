@@ -1,6 +1,4 @@
----
-name: jokker
-position: RE
+name: "jokker"
+position: "RE"
 image_path: "https://unsplash.it/600/503?image=40&a=.png"
-twitter: jokker87
----
+twitter: "jokker87"
