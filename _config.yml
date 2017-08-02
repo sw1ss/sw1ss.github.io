@@ -33,7 +33,7 @@ defaults:
       path: ""
       type: "members"
     values:
-      layout: "page"
+      layout: "default"
   - scope:
       path: "index.html"
       type: "pages"
