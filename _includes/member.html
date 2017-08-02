@@ -1,22 +1,21 @@
-<p>
-   <h3>{{ include.member.name }}</h3>
-   <div class="">
-      <img src="{% include relative-src.html src=include.member.image_path %}" alt="{{ include.member.name }}" />
-   </div>
-   <br />
-   <div class="details">
-      <div class="name">
-	<h4>Name : </h4>
-	{{ include.member.name }}
-      </div>
-      <div class="position">
-	<h4>Team Position : </h4>
-	   {{ include.member.position }}
-      </div>
-   </div>
-   <h3>Social Networks</h3>
-   <div class="social-networks">
-      <h4>Twitter : </h4>
-      <a href="https://twitter.com/{{ include.member.twitter }}" target="_blank">@{{ include.member.twitter }}</a>
-   </div>
-</p>
+
+		<h3>{{ include.member.name }}</h3>
+			<div class="">
+				<img src="{{ include.member.image_path }}" alt="{{ include.member.name }}" />
+   			</div>
+   			<br>
+   			<div class="details">
+      				<div class="name">
+					<h4>Name : </h4>
+					{{ include.member.name }}
+      				</div>
+      				<div class="position">
+					<h4>Team Position : </h4>
+	   				{{ include.member.position }}
+      				</div>
+			</div>
+   		<h3>Social Networks</h3>
+   		<div class="">
+      			<h4>Twitter : </h4>
+      			<a href="https://twitter.com/{{ include.member.twitter }}" target="_blank">@{{ include.member.twitter }}</a>
+   		</div>
