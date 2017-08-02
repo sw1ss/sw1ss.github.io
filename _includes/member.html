@@ -6,15 +6,15 @@
             <h4>Team Position : </h4>{{ include.member.position }}
             <h4>Social Networks :</h4>
             <ul>
-                {% if include.member.twitter != "" %}
+                {% if include.member.twitter %}
                 <li>
-                    <h5>Twitter : </h5><a href="https://twitter.com/{{ include.member.twitter }}" target="_blank">{{ include.member.twitter }}'s Twitter</a>
+                    <h5>Twitter : </h5><a href="https://twitter.com/{{ include.member.twitter }}" target="_blank">{{ include.member.name }}'s Twitter</a>
                 </li>
                 {% endif %}
                 
-                {% if include.member.github != "" %}
+                {% if include.member.github %}
                 <li>
-                    <h5>Github : </h5><a href="https://github.com/{{ include.member.github }}" target="_blank">{{ include.member.twitter }}'s Github</a>
+                    <h5>Github : </h5><a href="https://github.com/{{ include.member.github }}" target="_blank">{{ include.member.name }}'s Github</a>
                 </li>
                 {% endif %}
             </ul>
