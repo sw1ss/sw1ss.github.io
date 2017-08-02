@@ -31,7 +31,7 @@ defaults:
       layout: "page"
   - scope:
       path: "members"
-      type: "members"
+      type: "pages"
     values:
       layout: "member"
   - scope:
