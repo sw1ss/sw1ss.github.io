@@ -1,0 +1,3 @@
+{% for member in include.members %}
+	<li class="blog-post">{% include member.html member=member %}</li>
+{% endfor %}
