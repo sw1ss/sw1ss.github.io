@@ -68,6 +68,9 @@
   url: http://sw1ss.team/members/pingtux/
   
 - name: pyth0n33
-  position: /
+  position: Web/Forensic
   image_path: http://sw1ss.team/images/members/default.jpg
   url: http://sw1ss.team/members/pyth0n33/
+  social-networks:
+    - name: Github
+      url: https://github.com/pythonix
