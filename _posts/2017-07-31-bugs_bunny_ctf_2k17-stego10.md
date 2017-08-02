@@ -1,3 +1,10 @@
+---
+title: Stego 10
+categories: bugs_bunny_ctf_2k17
+author_member: MH
+show_comments: false
+---
+
 # Stego10
 This was the easiest steganography challenge - almost too easy to make a writeup
 ## Challenge description

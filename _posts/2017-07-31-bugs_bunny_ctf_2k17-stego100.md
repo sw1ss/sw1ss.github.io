@@ -1,3 +1,10 @@
+---
+title: Stego 100
+categories: bugs_bunny_ctf_2k17
+author_member: MH
+show_comments: false
+---
+
 # Stego100
 In this challenge we had to separate the even from the odd pixels
 ## Challenge description
