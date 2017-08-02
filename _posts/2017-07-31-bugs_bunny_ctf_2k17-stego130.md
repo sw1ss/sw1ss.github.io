@@ -5,7 +5,7 @@ author_member: MH
 show_comments: false
 ---
 
-# Stego130
+# Fix Me (Stego 130)
 In this challenge we have to fix a QR code.
 
 ## Challenge description

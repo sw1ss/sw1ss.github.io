@@ -5,7 +5,7 @@ author_member: MH
 show_comments: false
 ---
 
-# Stego100
+# odd & even 2 (Stego 100)
 In this challenge we had to separate the even from the odd pixels
 ## Challenge description
 ```text
