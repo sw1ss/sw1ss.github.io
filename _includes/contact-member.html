@@ -1,5 +1,6 @@
 <p>
-    <form name="contact-form" action="http://formspree.io/contact@sw1ss.team">
+    <h2>Send a message to team member {{ include.contact.name }}</h2>
+    <form name="contact-form" action="http://formspree.io/{{ include.contact.email }}">
         <label for="email">Email :</label>
         <input name="_replyto" type="email" placeholder="you@example.com" required="" />
         <label for="message">Message :</label>

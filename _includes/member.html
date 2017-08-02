@@ -1,7 +1,7 @@
         <div class="members container halves">
             <div>
                 <ul class="image-list">
-                    <li><img src="{{ include.member.image_path }}" alt="{{ include.member.name }}" width="350"></li>
+                    <li><a href="{{ include.member.url }}"><img src="{{ include.member.image_path }}" alt="{{ include.member.name }}" width="350"></a></li>
                 </ul>
             </div>
             <div>
@@ -15,6 +15,6 @@
                 {% endfor %}
                 {% for bug-bounty in include.member.bug-bounties %}
                     <a href="{{ bug-bounty.url }}">{{ bug-bounty.vendor }}'s Hall Of Fame</a><br />
-            {% endfor %}
+                {% endfor %}
             </div>
         </div>
