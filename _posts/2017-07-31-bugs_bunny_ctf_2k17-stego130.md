@@ -1,6 +1,6 @@
 ---
 title: Stego 130
-categories: bugs_bunny_ctf_2k17
+category: bugs_bunny_ctf_2k17
 author_member: MH
 show_comments: false
 ---
