@@ -13,7 +13,7 @@ We have to find the flag inside a file.
 what's going on here ? i didn't find anything important here , can you help me ? 
 [Link to file omitted]
 ```
-And the following file:  ![file.zip](http://sw1ss.team/files/Bugs_Bunny_CTF_2k17/file.zip)
+And the following file: [file.zip](http://sw1ss.team/files/Bugs_Bunny_CTF_2k17/file.zip)
 
 ## Solution
 Running `binwalk` on the file shows the following:
