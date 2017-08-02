@@ -17,7 +17,7 @@ layout: page
 			<h2>Author</h2>
 			<ul class="image-grid">
 				{% assign author_id = page.author_member | prepend: "/members/" | append: "/" %}
-				{% assign author = site.members | where: "url", author_id | first %}
+				{% assign author = site.data.members | where: "url", author_id | first %}
 
 				<li>{% include member.html member=author %}</li>
 			</ul>
