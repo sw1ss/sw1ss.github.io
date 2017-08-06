@@ -21,8 +21,8 @@
       url: "https://access.redhat.com/articles/66234"
   
 - name: afs
-  position: Web
-  image_path: http://sw1ss.team/images/members/afs.jpg
+  position: Web/Crypto
+  image_path: http://sw1ss.team/images/members/afs.png
   url: http://sw1ss.team/members/afs/
   social-networks:
   - name: Twitter
