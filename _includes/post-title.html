@@ -5,4 +5,9 @@
 		</span>
 	{% endfor %}
 	<span class="post-date">{{ include.post.date | date: "%B %d, %Y" }}</span>
+	{% if include.post.author_member %}
+	<span class="post-author">
+        - by <a href="/members/{{ include.post.author_member }}">{{ include.post.author_member }}</a>
+    </span>
+	{% endif %}
 </p>

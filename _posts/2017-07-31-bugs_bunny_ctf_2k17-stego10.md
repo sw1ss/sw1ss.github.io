@@ -1,5 +1,5 @@
 ---
-title: Stego 10
+title: Stego10
 category: bugs_bunny_ctf_2k17
 author_member: MH
 show_comments: false

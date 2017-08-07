@@ -1,12 +1,15 @@
 - name: 4ng3l0fh3ll
-  position: Web/Forensic/Dictator
+  position: Web/Exploitation/Forensic/Dictator
   image_path: http://sw1ss.team/images/members/4ng3l0fh3ll.jpg
   url: http://sw1ss.team/members/4ng3l0fh3ll/
+  email: michael.gottburg@heig-vd.ch
   social-networks:
     - name: Twitter
       url: https://twitter.com/VoiceOfTheHell
     - name: Github
       url: https://github.com/gottburgm
+    - name: CTFtime
+      url: https://ctftime.org/user/14319
   hacking-platforms:
     - name: Root-me
       url: https://www.root-me.org/Michael-Gottburg?inc=score&lang=en
@@ -27,6 +30,8 @@
   social-networks:
   - name: Twitter
     url: https://twitter.com/sandstroh
+  - name: CTFtime
+    url: https://ctftime.org/user/18629
 
 - name: avarx
   position: Web
@@ -35,32 +40,53 @@
   social-networks:
     - name: Twitter
       url: https://twitter.com/avarx_
+    - name: CTFtime
+      url: https://ctftime.org/user/9592
 
 - name: jokker
-  position: RE
+  position: Reverse Engineering
   image_path: http://sw1ss.team/images/members/jokker.jpg
   url: http://sw1ss.team/members/jokker/
   social-networks:
      - name: Twitter
        url: https://twitter.com/jokker87
+     - name: CTFtime
+       url: https://ctftime.org/user/27402
 
 - name: MH
-  position: Crypto/Stego
+  position: Cryptography/Steganography
   image_path: http://sw1ss.team/images/members/MH.jpg
   url: http://sw1ss.team/members/MH/
+  social-networks:
+    - name: Github
+      url: https://github.com/Miro-H
+    - name: CTFtime
+      url: https://ctftime.org/user/18636
+  hacking-platforms:
+    - name: Hacking-Lab
+      url: https://www.hacking-lab.com/user/profile/_MH_/
   
 - name: morpheuz
-  position: /
+  position: Reverse Engineering/Exploitation/Programming
   image_path: http://sw1ss.team/images/members/morpheuz.jpg
   url: http://sw1ss.team/members/morpheuz/
-  
+  social-networks:
+    - name: Twitter
+      url: https://twitter.com/Morpheuz_
+    - name: Github
+      url: https://github.com/morpheuzCTF
+    - name: CTFtime
+      url: https://ctftime.org/user/17617
+      
 - name: muffinx
-  position: PWN/RE
+  position: Pwning/Reverse Engineering
   image_path: http://sw1ss.team/images/members/muffinx.png
   url: http://sw1ss.team/members/muffinx/
   social-networks:
     - name: Twitter
       url: https://twitter.com/muffiniks
+    - name: CTFtime
+      url: https://ctftime.org/user/9042
   
 - name: pingtux
   position: /

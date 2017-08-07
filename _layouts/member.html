@@ -7,6 +7,11 @@ layout: page
 		<div class="blog-post text-container members">
 			<div class="post-content">
             	{% include member.html member=member %}
+            	{% if member.email %}
+                    
+                    {% include contact-member.html contact=member %}
+                    
+                {% endif %}
 			</div>
 	
 		</div>

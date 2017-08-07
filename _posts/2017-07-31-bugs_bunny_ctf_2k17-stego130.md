@@ -1,11 +1,11 @@
 ---
-title: Stego 130
+title: Fix Me (Stego 130)
 category: bugs_bunny_ctf_2k17
 author_member: MH
 show_comments: false
 ---
 
-# Stego130
+# Fix Me (Stego 130)
 In this challenge we have to fix a QR code.
 
 ## Challenge description
