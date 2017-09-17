@@ -5,7 +5,7 @@ author_member: MH
 show_comments: false
 ---
 # ICSS (MISC)
-This challenge was about reversing the encryption of a "Irreversible Cipher Stream Service".
+This challenge was about reversing the encryption of an "Irreversible Cipher Stream Service".
 ## Challenge description
 ```text
 The Irreversible Cipher Stream Service was used by someone to encrypt a secret, luckily we have found a freeware version of this weird service that could be used to get the secret.
@@ -29,21 +29,21 @@ B64 cipher output: oGOipII=
 
 So we can test this ICSS with up to 6 characters. When I tested it for some time, it was obvious that depending on the position of the character, it is encoded differently. For example with the letter "a":
 ```
-a		=>	oA==
-aa		=>	oGM=
-aaa		=>	oGOi
+a	=>	oA==
+aa	=>	oGM=
+aaa	=>	oGOi
 aaaa	=>	oGOipA==
 aaaaa	=>	oGOipOk=
 aaaaaa	=>	oGOipOks
 ```
-That also means, that it is a problem that this "freeware version" only encrypts 6 chars, because otherwise we could bruteforce the flag. However before realising that I tried that, which gave me the start of the flag: `EKO{Mr`
+That also means, that it is a problem that this "freeware version" only encrypts 6 chars, because otherwise we could bruteforce the flag. However before realising that I tried bruteforcing, which gave me the start of the flag: `EKO{Mr`
 
-What brought me on the right track was the idea of a friend:
+What brought me on the right track was the idea of a friend to try the following command:
 `printf '\x00\x00\x00\x00\x00\x00'| nc icss.ctf.site 40112`
-Which is encrypted to `AQECAwUI` which is after base64 decoding and translating to binary: `1 1 10 11 101 1000`. That are the starting numbers of the [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number) sequence: `1, 1, 2, 3, 5`
+That plaintext is encrypted to `AQECAwUI` which is after base64 decoding and translating to binary: `1 1 10 11 101 1000`. That are the starting numbers of the [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number) sequence: `1, 1, 2, 3, 5`
 
 However for example `printf '\x61\x00\x00\x00\x00\x00'| nc icss.ctf.site 40112` was `10100000 10 11000011 11000101 10001000 1001101` in binary, which is not exactly a part of the Fibonacci sequence. 
-On the other hand `printf '\x00\x00\x00\x00\x00\x61'| nc icss.ctf.site 40112` is encrypted to `1 1 10 11 101 1101001` which makes much more sense. So apparently the first character messes up our Fibonacci sequence. When trying '\x01\x00\x00\x00\x00\x00'  (in binary `0 10 11 101 1000 1101`) it became clear that the **first number decides where we start in the sequence**. In this case zero is some sort of special case where we start with `fib[1] = 1`, when the first byte is `\x01` the sequence starts from the second character with `fib[3] = 2`. Generally it holds that when `i` is the order of the first character, the sequence starts at `fib[i+2]`.
+On the other hand `printf '\x00\x00\x00\x00\x00\x61'| nc icss.ctf.site 40112` is encrypted to `1 1 10 11 101 1101001` which makes much more sense (the start is still Fibonacci). So apparently the first character messes up our Fibonacci sequence. When trying plaintexts like '\x01\x00\x00\x00\x00\x00'  (encrypts to `0 10 11 101 1000 1101`) it became clear that the **first number decides where we start in the sequence**. In this case zero is some sort of special case where we start with `fib[1] = 1`, when the first byte is `\x01` the sequence starts from the second character with `fib[3] = 2` (The first characters encoding is different from the others, but that doesn't matter since we know that one already). Generally it holds that when `i` is the order of the first character, the sequence starts at `fib[i+2]`.
 
 With a low number for the first byte (for example `\x00`) it is easy to see that the ciphertext is the XOR of the order of the plaintext character and the fibonacci number at that place.
 
@@ -64,7 +64,7 @@ But we still have a problem: The Fibonacci numbers grow bigger very fast:
 14: 0b101111001
 15: 0b1001100010
 ```
-Which means already `fib[14]` has more than 8 bits.  The easiest solution is to take XOR the plaintext character at position `j` with `fib[j+2]%128`. And indeed that's what the ICSS does.
+Which means already `fib[14]` has more than 8 bits.  The easiest solution is to XOR the plaintext character at position `j` with `fib[j+2]%128`. And indeed that's what the ICSS does.
 
 So finally I wrote the following little script to generate the Fibonacci numbers and directly decrypt the flag. I knew that the first letter was `E` because of the bruteforce attempt, of course that would have been easy to guess.
 
